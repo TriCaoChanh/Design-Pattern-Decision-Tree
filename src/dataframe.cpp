@@ -5,10 +5,10 @@ Dataframe::Dataframe()
     this->shape.first = NUMBER_OF_ROWS;
     this->shape.second = NUMBER_OF_COLUMNS;
 
-    this->Min = vector<double>(NUMBER_OF_COLUMNS);
-    this->Max = vector<double>(NUMBER_OF_COLUMNS);
-    this->Mean = vector<double>(NUMBER_OF_COLUMNS);
-    this->Variance = vector<double>(NUMBER_OF_COLUMNS);
+    this->Min = vector<int>(NUMBER_OF_COLUMNS);
+    this->Max = vector<int>(NUMBER_OF_COLUMNS);
+    this->Mean = vector<float>(NUMBER_OF_COLUMNS);
+    this->Variance = vector<float>(NUMBER_OF_COLUMNS);
 }
 Dataframe::~Dataframe() {}
 
@@ -21,6 +21,8 @@ Dataframe *Dataframe::read_csv(string path)
     string line, value;
     stringstream ss;
 
+    console->log("Reading file");
+
     parser.read_file(path);
     ss << parser.get_data();
     for (int i = 0; i < df->shape.second; i++)
@@ -31,7 +33,7 @@ Dataframe *Dataframe::read_csv(string path)
             getline(ss, value, '\n');
 
         df->columns.push_back(value);
-        df->data.push_back(vector<double>(NUMBER_OF_ROWS));
+        df->data.push_back(vector<int>(NUMBER_OF_ROWS));
     }
 
     for (int row=0; row < df->shape.first; row++){
@@ -42,7 +44,7 @@ Dataframe *Dataframe::read_csv(string path)
             else
                 getline(ss, value, '\n');
 
-            df->data[col][row] = stod(value);
+            df->data[col][row] = stoi(value);
         }
 
     }
@@ -73,7 +75,7 @@ void Dataframe::statistics_()
     }
 }
 
-vector<double> Dataframe::operator[](int column_index)
+vector<int> Dataframe::operator[](int column_index)
 {
     return this->data[column_index];
 }

@@ -8,15 +8,15 @@
 class Dataframe
 {
 private:
-    vector<vector<double>> data;
-    vector<double> Min;
-    vector<double> Max;
-    vector<double> Mean;
-    vector<double> Variance;
+    vector<int> Min;
+    vector<int> Max;
+    vector<float> Mean;
+    vector<float> Variance;
 private:
     void statistics_();
 
 public:
+    vector<vector<int>> data;
     vector<string> columns;
     pair<int, int> shape;
 
@@ -26,7 +26,7 @@ public:
 
     static Dataframe* read_csv(string);
 
-    vector<double> operator[](int);
+    vector<int> operator[](int);
     double min(int);
     double max(int);
     double mean(int);

@@ -3,7 +3,9 @@
 
 #define NUMBER_OF_ROWS 284807
 #define NUMBER_OF_COLUMNS 31
-#define FILE_PATH "creditcard.csv"
+#define FILE_PATH "preprocessed_data.csv"
+
+#define NUMBER_OF_BINS 5
 
 #include <iostream>
 #include <string>

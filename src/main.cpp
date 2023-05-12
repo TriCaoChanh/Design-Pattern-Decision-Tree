@@ -7,6 +7,7 @@
 #include "strategy.h"
 #include "dataframe.h"
 #include "file_parser.h"
+#include "model.h"
 
 
 void testLogger()
@@ -15,14 +16,12 @@ void testLogger()
     console->log("Log successfully!");
 }
 
-void testTrainer()
+void testParser()
 {
-    // Logger *console = Logger::get_logger();
-
-    Strategy *regression_strategy = new StrategyRegression();
-    Preprocessor optimizer(regression_strategy);
-
-    optimizer.preprocessing(true, false);
+    CSV_Parser *parser = new CSV_Parser();
+    parser->read_file(FILE_PATH);
+    parser->print_file();
+    delete parser;
 }
 
 void testDataframe(){
@@ -41,16 +40,31 @@ void testDataframe(){
     delete df;
 }
 
-void testParser() {
-    CSV_Parser* parser = new CSV_Parser();
-    parser->read_file(FILE_PATH);
-    parser->print_file();
-    delete parser;
+void testPreprocessor()
+{
+    // Logger *console = Logger::get_logger();
+
+    Strategy *regression_strategy = new StrategyRegression();
+    Preprocessor preprocessor(regression_strategy);
+
+    preprocessor.preprocessing(true, false);
+}
+
+void testDecisionTree() {
+    Logger *console = Logger::get_logger();
+    
+    Model *decision_tree = new DecisionTreeAdaptor();
+    Dataframe *df = Dataframe::read_csv(FILE_PATH);
+
+    decision_tree->fit(df);
+    float accuracy = decision_tree->evaluate(df);
+
+    console->log("Accuracy: " + to_string(accuracy));
 }
 
 int main()
 {
-    testDataframe();
+    testDecisionTree();
 
     return 0;
 }
