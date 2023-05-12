@@ -15,7 +15,7 @@ vpath %.h $(INCLUDE)
 
 MAKE = $(CC) $(INC) 
 
-OS_OBJ = $(addprefix $(OBJ)/, logger.o node.o strategy.o preprocessor.o tree.o dataframe.o main.o)
+OS_OBJ = $(addprefix $(OBJ)/, logger.o node.o strategy.o preprocessor.o tree.o dataframe.o file_parser.o main.o)
 HEADER = $(wildcard $(INCLUDE)/*.h)
 
 all: os

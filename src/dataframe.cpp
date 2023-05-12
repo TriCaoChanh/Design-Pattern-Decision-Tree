@@ -17,43 +17,37 @@ Dataframe *Dataframe::read_csv(string path)
     Logger *console = Logger::get_logger();
     Dataframe *df = new Dataframe();
 
-    fstream file;
-
-    file.open(path, ios::in);
+    CSV_Parser parser;
     string line, value;
     stringstream ss;
 
-    // Read columns' name
-    file >> line;
-    ss << line;
-
-    while (getline(ss, value, ','))
+    parser.read_file(path);
+    ss << parser.get_data();
+    for (int i = 0; i < df->shape.second; i++)
     {
+        if (i != df->shape.second - 1)
+            getline(ss, value, ',');
+        else
+            getline(ss, value, '\n');
+
         df->columns.push_back(value);
         df->data.push_back(vector<double>(NUMBER_OF_ROWS));
-        console->log(value);
     }
 
-    // Read data
-    for (int row = 0; row < NUMBER_OF_ROWS; row++)
-    {
-        ss.str("");
-        ss.clear();
+    for (int row=0; row < df->shape.first; row++){
 
-        file >> line;
-        ss << line;
-        int column_index = 0;
+        for (int col = 0; col < df->shape.second; col++){
+            if (col != df->shape.second - 1)
+                getline(ss, value, ',');
+            else
+                getline(ss, value, '\n');
 
-        while (getline(ss, value, ','))
-        {
-            df->data[column_index][row] = stod(value);
-            column_index++;
+            df->data[col][row] = stod(value);
         }
+
     }
 
     df->statistics_();
-
-    file.close();
 
     return df;
 }

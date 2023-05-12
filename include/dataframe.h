@@ -3,6 +3,7 @@
 
 #include "common.h"
 #include "logger.h"
+#include "file_parser.h"
 
 class Dataframe
 {

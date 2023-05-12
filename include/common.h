@@ -2,7 +2,8 @@
 #define __COMMON_H__
 
 #define NUMBER_OF_ROWS 284807
-#define NUMBER_OF_COLUMNS 31 
+#define NUMBER_OF_COLUMNS 31
+#define FILE_PATH "creditcard.csv"
 
 #include <iostream>
 #include <string>
@@ -22,5 +23,9 @@ class Preprocessor;
 class Strategy;
 class StrategyRegression;
 class StrategyClassification;
+class Dataframe;
+class Parser;
+class CSV_Parser;
+class Parquet_Parser;
 
 #endif

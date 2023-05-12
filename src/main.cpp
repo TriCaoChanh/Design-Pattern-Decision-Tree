@@ -6,6 +6,8 @@
 #include "preprocessor.h"
 #include "strategy.h"
 #include "dataframe.h"
+#include "file_parser.h"
+
 
 void testLogger()
 {
@@ -26,7 +28,7 @@ void testTrainer()
 void testDataframe(){
     Logger *console = Logger::get_logger();
 
-    Dataframe* df = Dataframe::read_csv("creditcard.csv");
+    Dataframe *df = Dataframe::read_csv(FILE_PATH);
 
     console->log("Dataframe shape: (" + to_string(df->shape.first) + ", " + to_string(df->shape.second) + ")");
 
@@ -37,6 +39,13 @@ void testDataframe(){
     df->collect(5);
 
     delete df;
+}
+
+void testParser() {
+    CSV_Parser* parser = new CSV_Parser();
+    parser->read_file(FILE_PATH);
+    parser->print_file();
+    delete parser;
 }
 
 int main()
