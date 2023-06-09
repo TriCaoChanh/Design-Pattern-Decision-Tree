@@ -12,22 +12,22 @@ StrategyRegression::~StrategyRegression() {}
 
 void StrategyRegression::discretize()
 {
-    console->log("Strategy Regression discretize");
+    console->log("Regression discretize");
 }
 
 void StrategyRegression::normalize()
 {
-    console->log("Strategy Regression normalize");
+    console->log("Regression normalize");
 }
 
 void StrategyRegression::feature_selection()
 {
-    console->log("Strategy Regression feature selection");
+    console->log("Regression feature selection");
 }
 
 void StrategyRegression::standardize()
 {
-    console->log("Strategy Regression standardize");
+    console->log("Regression standardize");
 }
 
 /**
@@ -39,20 +39,20 @@ StrategyClassification::~StrategyClassification() {}
 
 void StrategyClassification::discretize()
 {
-    console->log("Strategy Classification discretize");
+    console->log("Classification discretize");
 }
 
 void StrategyClassification::normalize()
 {
-    console->log("Strategy Classification normalize");
+    console->log("Classification normalize");
 }
 
 void StrategyClassification::feature_selection()
 {
-    console->log("Strategy Classification feature selection");
+    console->log("Classification feature selection");
 }
 
 void StrategyClassification::standardize()
 {
-    console->log("Strategy Classification standardize");
+    console->log("Classification standardize");
 }

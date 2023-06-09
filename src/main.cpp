@@ -18,7 +18,7 @@ void testLogger()
 
 void testParser()
 {
-    CSV_Parser *parser = new CSV_Parser();
+    Parser *parser = new CSV_Parser();
     parser->read_file(FILE_PATH);
     parser->print_file();
     delete parser;
@@ -31,10 +31,10 @@ void testDataframe(){
 
     console->log("Dataframe shape: (" + to_string(df->shape.first) + ", " + to_string(df->shape.second) + ")");
 
-    console->log("Statistics");
+    console->log("\nStatistics");
     df->describe();
 
-    console->log("Head");
+    console->log("\nHead");
     df->collect(5);
 
     delete df;
@@ -42,12 +42,25 @@ void testDataframe(){
 
 void testPreprocessor()
 {
-    // Logger *console = Logger::get_logger();
+    Logger *console = Logger::get_logger();
 
+    // REGRESSION STREATEGY
+    console->log("Preprocessing Strategy for Regression");
     Strategy *regression_strategy = new StrategyRegression();
-    Preprocessor preprocessor(regression_strategy);
+    Preprocessor regression_preprocessor(regression_strategy);
 
-    preprocessor.preprocessing(true, false);
+    regression_preprocessor.preprocessing(true, false);
+
+    // CLASSIFICATION STRATEGY
+    console->log("-----");
+    console->log("Preprocessing Strategy for Classification");
+    Strategy *classification_strategy = new StrategyClassification();
+    Preprocessor classification_preprocessor(classification_strategy);
+
+    classification_preprocessor.preprocessing(false, true);
+
+    delete regression_strategy;
+    delete classification_strategy;
 }
 
 void testDecisionTree() {
@@ -60,11 +73,24 @@ void testDecisionTree() {
     float accuracy = decision_tree->evaluate(df);
 
     console->log("Accuracy: " + to_string(accuracy));
+
+    delete decision_tree;
+    delete df;
 }
 
-int main()
+int main(int argc, char *argv[])
 {
-    testDecisionTree();
+    int input = atoi(argv[1]);
+    if (input == 0)
+        testLogger();
+    else if (input == 1)
+        testParser();
+    else if (input == 2)
+        testDataframe();
+    else if (input == 3)
+        testPreprocessor();
+    else if (input == 4)
+        testDecisionTree();
 
     return 0;
 }

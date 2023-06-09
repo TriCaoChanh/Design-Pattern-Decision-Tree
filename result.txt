@@ -1,0 +1,4 @@
+Log: Reading file
+Log: Constructing Decision Tree
+Log: Evaluating Model
+Log: Accuracy: 1.000000

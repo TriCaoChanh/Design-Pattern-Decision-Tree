@@ -1,4 +1,5 @@
 #include "preprocessor.h"
+#include <unistd.h>
 
 Preprocessor::Preprocessor(Strategy *strategy)
 {
@@ -18,12 +19,16 @@ void Preprocessor::preprocessing(bool isRegression, bool isClassification)
     }
     else if (isRegression)
     {
+        sleep(1);
         this->strategy->discretize();
+        sleep(1);
         this->strategy->normalize();
     }
     else if (isClassification)
     {
+        sleep(1);
         this->strategy->feature_selection();
+        sleep(1);
         this->strategy->standardize();
     }
     else

@@ -2,7 +2,7 @@
 #define __STRATEGY_H__
 
 #include "common.h"
-#include "Logger.h"
+#include "logger.h"
 
 class Strategy
 {
